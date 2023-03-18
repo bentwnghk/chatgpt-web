@@ -69,7 +69,12 @@ export default {
     socks: 'Socks',
     httpsProxy: 'HTTPS Proxy',
     balance: 'API余額',
-    monthlyUsage: '本月使用量',
+		monthlyUsage: '本月使用量',
+    speechSetting: '語音設置',
+    speakLang: '語言',
+    speakSound: '聲音',
+    pitch: '音調',
+    rate: '語速',
   },
   store: {
     siderButton: '提示詞商店',
