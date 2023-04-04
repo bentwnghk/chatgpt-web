@@ -49,7 +49,7 @@ onMounted(() => {
           Mr.5️⃣ ChatGPT，全稱 Chat Generative Pre-trained Transformer，
         </p>
         <p>
-          是一個使用 OpenAI 大型語言模型之人工智慧聊天機器人。
+          是一個使用 OpenAI 大型語言模型之人工智能聊天機械人。
         </p>
       </div>
       <p>{{ $t("setting.api") }}：{{ config?.apiModel ?? '-' }}</p>
