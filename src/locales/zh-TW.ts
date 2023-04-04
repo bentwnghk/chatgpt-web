@@ -68,11 +68,11 @@ export default {
     timeout: '逾時',
     socks: 'Socks',
     httpsProxy: 'HTTPS Proxy',
-    balance: 'API余額',
+    balance: 'API餘額',
     monthlyUsage: '本月使用量',
   },
   store: {
-    siderButton: '提示詞商店',
+    siderButton: '提示詞倉庫',
     local: '本機',
     online: '線上',
     title: '標題',
