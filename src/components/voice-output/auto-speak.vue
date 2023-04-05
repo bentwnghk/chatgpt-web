@@ -16,10 +16,10 @@ const voiceIcon = computed(() => ttsStore.autoSpeak
 const handleUpdate = () => {
   ttsStore.updateStore({ autoSpeak: !ttsStore.autoSpeak })
   if (ttsStore.autoSpeak) {
-    message.success('开启自动播放')
+    message.success('開啟自動播放')
   }
   else {
-    message.warning('关闭自动播放')
+    message.warning('關閉自動播放')
     cancelSpeak()
   }
 }
