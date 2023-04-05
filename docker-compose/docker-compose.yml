@@ -33,6 +33,10 @@ services:
       SOCKS_PROXY_PASSWORD:
       # HTTPS_PROXY 代理，可选
       HTTPS_PROXY:
+      # Azure Subscription Key
+      AZURE_SUBSCRIPTION_KEY:
+      # SPEECH_REGION
+      AZURE_SPEECH_REGION:
   nginx:
     container_name: nginx
     image: nginx:alpine
