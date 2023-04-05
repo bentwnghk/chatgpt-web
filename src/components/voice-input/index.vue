@@ -24,7 +24,7 @@ const enableVoice = ref(false)
 const isShowModal = ref(false)
 const voiceIcon = computed(() => enableVoice.value ? 'material-symbols:auto-detect-voice-outline' : 'ic:round-keyboard-voice')
 const sentences = ref<string[]>([])
-const language = ref('zh-CN')
+const language = ref('zh-HK')
 const showTip = ref(false)
 const { getSpeechObject } = useSpeechObject()
 
