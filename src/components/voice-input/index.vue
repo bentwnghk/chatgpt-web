@@ -47,7 +47,7 @@ const changeEnableVoice = () => {
 const initRecognition = async () => {
   const { SpeechRecognition } = await getSpeechObject()
   if (!SpeechRecognition) {
-    message.warning('当前浏览器不支持语音功能！')
+    message.warning('當前瀏覽器不支持語音功能！')
     return
   }
 
@@ -74,7 +74,7 @@ const startRecording = async () => {
     sentences.value = [] // 清空已有的句子
     recognition.lang = language.value
     recognition.start()
-    message.success('语音开启！')
+    message.success('語音開啟！')
   }
 }
 // 结束录音
@@ -90,7 +90,7 @@ const stopRecording = () => {
   recognition.onresult = null
   recognition = null
   logger('停止语音')
-  message.warning('语音关闭！')
+  message.warning('語音關閉！')
 }
 // 监听语音识别结果
 const handleRecognitionResult = () => {
@@ -180,17 +180,17 @@ export default {
     v-model:show="showTip"
     style="width: 75%; max-width: 640px;"
     preset="dialog"
-    title="语音输入 tips"
+    title="語音輸入 Tips"
     :mask-closable="false"
     positive-text="OK"
-    negative-text="不在提示"
+    negative-text="不再提示"
     :closable="false"
     :close-on-esc="false"
     @positive-click="onPositiveClick"
     @negative-click="onNegativeClick"
   >
-    <NAlert type="default" title="使用说明">
-      开启语音功能后，就可以通过语音来输入内容，能更好的与 chatgpt 聊天。为了更好的操作，提供了一些语音指令，以方便你与 chatgpt 交流：
+    <NAlert type="default" title="使用說明">
+      開啟語音功能后，就可以通過語音來輸入內容，能更好的與 ChatGPT 聊天。為了更好的操作，提供了一些語音指令，以方便你與 ChatGPT 交流：
     </NAlert>
     <NDescriptions label-placement="left" bordered :column="1" style="max-height: 40vh;overflow: auto">
       <NDescriptionsItem v-for="item in tips" :key="item.label" label-style="width: 80px">
