@@ -28,7 +28,7 @@ watchEffect(() => {
   let sound = formData.value.sound || ''
   if (speechStore.speechSetting.lang !== formData.value.lang) {
     // reset when lang change
-    sound = langOption.voices[0].value
+    sound = langOption.voices[0]?.value
     formData.value.sound = sound
   }
 
