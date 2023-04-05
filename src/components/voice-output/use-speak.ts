@@ -67,7 +67,7 @@ export const useSpeak = () => {
 
     const utterance = await getVoice(text)
     if (!utterance || !synth) {
-      message.warning('当前浏览器不支持语音功能！')
+      message.warning('當前瀏覽器不支持語音功能！')
       return
     }
     synth?.speak(utterance)
