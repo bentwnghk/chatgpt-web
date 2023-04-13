@@ -71,7 +71,7 @@ export default {
     socks: 'Socks',
     httpsProxy: 'HTTPS Proxy',
     balance: 'API餘額',
-    monthlyUsage: '本月使用量',
+    monthlyUsage: '本月使用量(美元)',
   },
   store: {
     siderButton: '提示詞倉庫',
