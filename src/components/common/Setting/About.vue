@@ -46,10 +46,10 @@ onMounted(() => {
       </h2>
       <div class="p-2 space-y-2 rounded-md bg-neutral-100 dark:bg-neutral-700">
         <p>
-          Mr.5️⃣ ChatGPT，全稱 Chat Generative Pre-trained Transformer，
+          Mr.5️⃣ ChatGPT➕️➕️ 人工智能聊天機械人
         </p>
         <p>
-          是一個使用 OpenAI 大型語言模型之人工智能聊天機械人。
+          本程式使用 OpenAI 大型語言模型，並在 ChatGPT 基礎上增加了語音、提示詞倉庫、截圖儲存等進階功能。
         </p>
       </div>
       <p>{{ $t("setting.api") }}：{{ config?.apiModel ?? '-' }}</p>
