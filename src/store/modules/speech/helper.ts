@@ -8,7 +8,6 @@ export interface SpeechConfig {
   showTip: boolean // 是否显示语音输入的指令提示
 
   autoSpeak?: boolean // 是否自动播放，不存入 ss
-
   speechSetting: {
     // 一个语音的原生对象，不存入 ss
     voice?: SpeechSynthesisVoice
@@ -16,6 +15,7 @@ export interface SpeechConfig {
     sound?: string
     pitch: number
     rate: number
+    useDefault: boolean
   }
 }
 
@@ -28,6 +28,7 @@ export function defaultState(): SpeechConfig {
       lang: 'en-US',
       pitch: 1,
       rate: 1,
+      useDefault: false,
     },
   }
 }
