@@ -122,7 +122,7 @@ export const useSpeechObject = () => {
   const speechStore = useSpeechStore()
 
   const usedVoices = computed(() => {
-    const isAzure = speechObj?.isAzure
+    const isAzure = speechObj?.isAzure && !speechStore.speechSetting?.useDefault
     const voices = allVoices.value
 
     if (!isReady.value || !voices.length)
@@ -178,7 +178,7 @@ export const useSpeechObject = () => {
     }
 
     const speechToken = getToken()
-    if (speechToken.token && speechToken.region) {
+    if (speechToken.token && speechToken.region && !speechStore.speechSetting?.useDefault) {
       const {
         SpeechRecognition,
         speechSynthesis,
