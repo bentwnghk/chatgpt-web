@@ -14,7 +14,8 @@ import HeaderComponent from './components/Header/index.vue'
 import { SvgIcon } from '@/components/common'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { useChatStore, usePromptStore } from '@/store'
-import { fetchChatAPIProcess } from '@/api'
+import type { StreamMessage } from '@/api'
+import { fetchChatStream } from '@/api'
 import { t } from '@/locales'
 import VoiceInput from '@/components/voice-input/index.vue'
 import AutoSpeak from '@/components/voice-output/auto-speak.vue'
@@ -113,45 +114,45 @@ async function onConversation() {
   try {
     let lastText = ''
     const fetchChatAPIOnce = async () => {
-      await fetchChatAPIProcess<Chat.ConversationResponse>({
+      await fetchChatStream({
         prompt: message,
         options,
         signal: controller.signal,
-        onDownloadProgress: ({ event }) => {
-          const xhr = event.target
-          const { responseText } = xhr
-          // Always process the final line
-          const lastIndex = responseText.lastIndexOf('\n', responseText.length - 2)
-          let chunk = responseText
-          if (lastIndex !== -1)
-            chunk = responseText.substring(lastIndex)
+        onMessage: (data: StreamMessage) => {
+          if (data.delta)
+            lastText += data.delta
+          else if (data.text)
+            lastText = data.text ?? ''
           try {
-            const data = JSON.parse(chunk)
             updateChat(
               +uuid,
               dataSources.value.length - 1,
               {
                 dateTime: new Date().toLocaleString(),
-                text: lastText + (data.text ?? ''),
+                text: lastText,
                 inversion: false,
                 error: false,
                 loading: true,
-                conversationOptions: { conversationId: data.conversationId, parentMessageId: data.id },
+                conversationOptions: { conversationId: data.csid, parentMessageId: data.id || '' },
                 requestOptions: { prompt: message, options: { ...options } },
               },
             )
 
-            if (openLongReply && data.detail.choices[0].finish_reason === 'length') {
+            if (openLongReply && data.finishReason === 'length') {
               options.parentMessageId = data.id
-              lastText = data.text
+              if (data.text)
+                lastText = data.text
               message = ''
               return fetchChatAPIOnce()
+            }
+            else if (data.finishReason) {
+              updateChatSome(+uuid, dataSources.value.length - 1, { loading: false })
             }
 
             scrollToBottomIfAtBottom()
           }
           catch (error) {
-            //
+          //
           }
         },
       })
@@ -244,39 +245,40 @@ async function onRegenerate(index: number) {
   try {
     let lastText = ''
     const fetchChatAPIOnce = async () => {
-      await fetchChatAPIProcess<Chat.ConversationResponse>({
+      await fetchChatStream({
         prompt: message,
         options,
         signal: controller.signal,
-        onDownloadProgress: ({ event }) => {
-          const xhr = event.target
-          const { responseText } = xhr
-          // Always process the final line
-          const lastIndex = responseText.lastIndexOf('\n', responseText.length - 2)
-          let chunk = responseText
-          if (lastIndex !== -1)
-            chunk = responseText.substring(lastIndex)
+        onMessage: (data: StreamMessage) => {
+          if (data.delta)
+            lastText += data.delta
+          else if (data.text)
+            lastText = data.text ?? ''
+
           try {
-            const data = JSON.parse(chunk)
             updateChat(
               +uuid,
               index,
               {
                 dateTime: new Date().toLocaleString(),
-                text: lastText + (data.text ?? ''),
+                text: lastText,
                 inversion: false,
                 error: false,
                 loading: true,
-                conversationOptions: { conversationId: data.conversationId, parentMessageId: data.id },
+                conversationOptions: { conversationId: data.csid, parentMessageId: data.id },
                 requestOptions: { prompt: message, options: { ...options } },
               },
             )
 
-            if (openLongReply && data.detail.choices[0].finish_reason === 'length') {
+            if (openLongReply && data.finishReason === 'length') {
               options.parentMessageId = data.id
-              lastText = data.text
+              if (data.text)
+                lastText = data.text
               message = ''
               return fetchChatAPIOnce()
+            }
+            else if (data.finishReason) {
+              updateChatSome(+uuid, dataSources.value.length - 1, { loading: false })
             }
           }
           catch (error) {
