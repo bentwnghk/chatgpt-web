@@ -10,5 +10,4 @@ interface Window {
 	oSpeechRecognition: any;
 }
 
-declare module 'web-speech-cognitive-services';
-declare module 'sse.js';
+declare module 'web-speech-cognitive-services'
