@@ -4,4 +4,3 @@ interface Window {
   $message?: import('naive-ui').MessageProviderInst;
   $notification?: import('naive-ui').NotificationProviderInst;
 }
-declare module 'sse.js';
