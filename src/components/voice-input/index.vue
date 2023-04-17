@@ -180,7 +180,7 @@ export default {
     v-model:show="showTip"
     style="width: 75%; max-width: 640px;"
     preset="dialog"
-    title="語音輸入 Tips"
+    title="語音輸入Tips"
     :mask-closable="false"
     positive-text="OK"
     negative-text="不再提示"
