@@ -83,7 +83,7 @@ router.post('/verify', async (req, res) => {
   }
 })
 
-router.post('/get-azure-token', getAzureSubscriptionKey)
+router.post('/get-azure-token', auth, getAzureSubscriptionKey)
 
 app.use('', router)
 app.use('/api', router)
