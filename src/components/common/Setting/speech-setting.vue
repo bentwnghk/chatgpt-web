@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NForm, NFormItem, NSelect, NSlider } from 'naive-ui'
+import { NForm, NFormItem, NSelect, NSlider, NSwitch } from 'naive-ui'
 import { computed, ref, watchEffect } from 'vue'
 import { useSpeechStore } from '@/store/modules/speech'
 import type { VoiceDataType } from '@/components/voice-input/speech-object'
@@ -28,7 +28,7 @@ watchEffect(() => {
   let sound = formData.value.sound || ''
   if (speechStore.speechSetting.lang !== formData.value.lang) {
     // reset when lang change
-    sound = langOption.voices[0].value
+    sound = langOption.voices[0]?.value
     formData.value.sound = sound
   }
 
@@ -62,6 +62,9 @@ export default {
     </NFormItem>
     <NFormItem :label="$t('setting.rate')" path="rate">
       <NSlider v-model:value="formData.rate" :min="0" :max="10" />
+    </NFormItem>
+    <NFormItem label="使用默認語音" path="useDefault">
+      <NSwitch v-model:value="formData.useDefault" />
     </NFormItem>
   </NForm>
 </template>
