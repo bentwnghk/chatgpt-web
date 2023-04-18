@@ -33,7 +33,7 @@ export function defaultState(): SpeechConfig {
 
 export function getLocalState(): SpeechConfig {
   const defaultConfig = defaultState()
-  const localState = ss.get(LOCAL_NAME)
+  const localState: SpeechConfig | null = ss.get(LOCAL_NAME)
   return {
     ...defaultConfig,
     ...localState,
