@@ -35,15 +35,9 @@ const setToken = (data: Partial<SpeechTokenType>) => {
   ss.set(LOCAL_NAME, newData)
 }
 
-// 一个单例，否则会调用多次调用。
-let tokenPromise: Promise<any>
 const uploadToken = async () => {
-  if (tokenPromise)
-    return await tokenPromise
-
   try {
-    tokenPromise = fetchAzureToken<AzureData>()
-    const { data } = await tokenPromise
+    const { data } = await fetchAzureToken<AzureData>()
     setToken({ ...data, loaded: true })
   }
   catch (_e) {
@@ -67,54 +61,6 @@ interface SpeechObjectType {
 }
 let speechObj: SpeechObjectType
 
-const getAzureVoices = (voices: SpeechSynthesisVoice[]): VoiceDataType[] => {
-  const baseOptions = langJson.auzre
-
-  const findEqualVoice = (lang: string, value: string, sameVoices: SpeechSynthesisVoice[]) => {
-    return sameVoices.find((item) => {
-      return item.name.includes(value.replace(`${lang}-`, ''))
-    })
-  }
-
-  return baseOptions.map((item) => {
-    const sameLangVoices = voices.filter(voice => voice.lang === item.lang) || []
-    const sameNameVoices = item.voices.filter(voice => findEqualVoice(item.lang, voice.value, sameLangVoices)) || []
-
-    if (sameLangVoices.length && sameNameVoices.length) {
-      return {
-        lang: item.lang,
-        label: item.label,
-        voices: sameNameVoices,
-        source: sameNameVoices.reduce((prev, cur) => {
-          prev[cur.value] = findEqualVoice(item.lang, cur.value, sameLangVoices) as SpeechSynthesisVoice
-          return prev
-        }, {} as Record<string, SpeechSynthesisVoice>),
-      }
-    }
-
-    return null as unknown as VoiceDataType
-  }).filter(item => !!item)
-}
-const getDefaultVoices = (voices: SpeechSynthesisVoice[]): VoiceDataType[] => {
-  const baseOptions = langJson.default
-
-  return baseOptions.reduce((prev, lang) => {
-    const curLangVoices = voices.filter(item => item.lang === lang)
-
-    prev.push({
-      lang,
-      label: lang,
-      voices: curLangVoices.map(item => ({ value: item.name, label: item.name })),
-      source: curLangVoices.reduce((prev, cur) => {
-        prev[cur.name] = cur
-        return prev
-      }, {} as Record<string, SpeechSynthesisVoice>),
-    })
-
-    return prev
-  }, [] as VoiceDataType[])
-}
-
 export const useSpeechObject = () => {
   const isInit = ref(false)
   const isReady = ref(false)
@@ -123,14 +69,41 @@ export const useSpeechObject = () => {
 
   const usedVoices = computed(() => {
     const isAzure = speechObj?.isAzure
+    const baseOptions = isAzure ? langJson.auzre : langJson.default
     const voices = allVoices.value
 
     if (!isReady.value || !voices.length)
       return []
 
-    const voicesOptions = isAzure ? getAzureVoices(voices) : getDefaultVoices(voices)
+    const findEqualVoice = (lang: string, value: string, sameVoices: SpeechSynthesisVoice[]) => {
+      if (isAzure) {
+        return sameVoices.find((item) => {
+          return item.name.includes(value.replace(`${lang}-`, ''))
+        })
+      }
+      else { return sameVoices.find(item => item.name === value) }
+    }
 
-    return voicesOptions
+    const data: VoiceDataType[] = baseOptions.map((item) => {
+      const sameLangVoices = voices.filter(voice => voice.lang === item.lang) || []
+      const sameNameVoices = item.voices.filter(voice => findEqualVoice(item.lang, voice.value, sameLangVoices)) || []
+
+      if (sameLangVoices.length && sameNameVoices.length) {
+        return {
+          lang: item.lang,
+          label: item.label,
+          voices: sameNameVoices,
+          source: sameNameVoices.reduce((prev, cur) => {
+            prev[cur.value] = findEqualVoice(item.lang, cur.value, sameLangVoices) as SpeechSynthesisVoice
+            return prev
+          }, {} as Record<string, SpeechSynthesisVoice>),
+        }
+      }
+
+      return null as unknown as VoiceDataType
+    }).filter(item => !!item)
+
+    return data
   })
 
   const awaitReady = async () => {
