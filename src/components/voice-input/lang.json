@@ -1,217 +1,232 @@
 {
-	"auzre": [
+	"azure": [
+		{
+			"lang": "en-GB",
+			"label": "English (United Kingdom)",
+			"voices": [
+				{
+					"value": "en-GB-AbbiNeural",
+					"label": "Abbi (Female)"
+				},
+				{
+					"value": "en-GB-RyanNeural",
+					"label": "Ryan (Male)"
+				},
+				{
+					"value": "en-GB-LibbyNeural",
+					"label": "Libby (Female)"
+				},
+				{
+					"value": "en-GB-OliverNeural",
+					"label": "Oliver (Male)"
+				},
+				{
+					"value": "en-GB-SoniaNeural",
+					"label": "Sonia (Female)"
+				},
+				{
+					"value": "en-GB-EthanNeural",
+					"label": "Ethan (Male)"
+				},
+				{
+					"value": "en-GB-OliviaNeural",
+					"label": "Olivia (Female)"
+				},
+				{
+					"value": "en-GB-AlfieNeural",
+					"label": "Alfie (Male)"
+				},
+				{
+					"value": "en-GB-MaisieNeural",
+					"label": "Maisie (Female)"
+				},
+				{
+					"value": "en-GB-NoahNeural",
+					"label": "Noah (Male)"
+				},
+				{
+					"value": "en-GB-HollieNeural",
+					"label": "Hollie (Female)"
+				},
+				{
+					"value": "en-GB-ElliotNeural",
+					"label": "Elliot (Male)"
+				}
+			]
+		},
 		{
 			"lang": "en-US",
 			"label": "English (United States)",
 			"voices": [
 				{
 					"value": "en-US-JennyNeural",
-					"label": "Jenny (Female, Neural)"
-				},
-				{
-					"value": "en-US-TonyNeural",
-					"label": "Tony (Male, Neural)"
-				},
-				{
-					"value": "en-US-SaraNeural",
-					"label": "Sara (Female, Neural)"
-				},
-				{
-					"value": "en-US-DavisNeural",
-					"label": "Davis (Male, Neural)"
-				},
-				{
-					"value": "en-US-AriaNeural",
-					"label": "Aria (Female, Neural)"
+					"label": "Jenny (Female)"
 				},
 				{
 					"value": "en-US-GuyNeural",
-					"label": "Guy (Male, Neural)"
+					"label": "Guy (Male)"
+				},
+				{
+					"value": "en-US-AriaNeural",
+					"label": "Aria (Female)"
+				},
+				{
+					"value": "en-US-TonyNeural",
+					"label": "Tony (Male)"
+				},
+				{
+					"value": "en-US-SaraNeural",
+					"label": "Sara (Female)"
+				},
+				{
+					"value": "en-US-DavisNeural",
+					"label": "Davis (Male)"
 				},
 				{
 					"value": "en-US-AnaNeural",
-					"label": "Ana (Female, Neural)"
+					"label": "Ana (Female)"
 				},
 				{
 					"value": "en-US-SteffanNeural",
-					"label": "Steffan (Male, Neural)"
+					"label": "Steffan (Male)"
 				},
 				{
 					"value": "en-US-NancyNeural",
-					"label": "Nancy (Female, Neural)"
+					"label": "Nancy (Female)"
 				},
 				{
 					"value": "en-US-ChristopherNeural",
-					"label": "Christopher (Male, Neural)"
+					"label": "Christopher (Male)"
 				},
 				{
 					"value": "en-US-JaneNeural",
-					"label": "Jane (Female, Neural)"
+					"label": "Jane (Female)"
 				},
 				{
 					"value": "en-US-MonicaNeural",
-					"label": "Monica (Female, Neural)"
-				}
-			]
-		},
-		{
-			"lang": "en-GB",
-			"label": "English (United Kingdom)",
-			"voices": [
-				{
-					"value": "en-GB-LibbyNeural",
-					"label": "Libby (Female, Neural)"
-				},
-				{
-					"value": "en-GB-AlfieNeural",
-					"label": "Alfie (Male, Neural)"
-				},
-				{
-					"value": "en-GB-AbbiNeural",
-					"label": "Abbi (Female, Neural)"
-				},
-				{
-					"value": "en-GB-OliverNeural",
-					"label": "Oliver (Male, Neural)"
-				},
-				{
-					"value": "en-GB-SoniaNeural",
-					"label": "Sonia (Female, Neural)"
-				},
-				{
-					"value": "en-GB-RyanNeural",
-					"label": "Ryan (Male, Neural)"
-				},
-				{
-					"value": "en-GB-OliviaNeural",
-					"label": "Olivia (Female, Neural)"
-				},
-				{
-					"value": "en-GB-ElliotNeural",
-					"label": "Elliot (Male, Neural)"
-				},
-				{
-					"value": "en-GB-MaisieNeural",
-					"label": "Maisie (Female, Neural)"
-				},
-				{
-					"value": "en-GB-EthanNeural",
-					"label": "Ethan (Male, Neural)"
-				},
-				{
-					"value": "en-GB-HollieNeural",
-					"label": "Hollie (Female, Neural)"
-				},
-				{
-					"value": "en-GB-NoahNeural",
-					"label": "Noah (Male, Neural)"
+					"label": "Monica (Female)"
 				}
 			]
 		},
 		{
 			"lang": "zh-HK",
-			"label": "中文(粵語，繁體)",
+			"label": "中文 (粵語，繁體)",
 			"voices": [
 				{
 					"value": "zh-HK-HiuGaaiNeural",
-					"label": "曉佳(女)"
+					"label": "曉佳 (女)"
 				},
 				{
 					"value": "zh-HK-HiuMaanNeural",
-					"label": "曉敏(女)"
+					"label": "曉敏 (女)"
 				},
 				{
 					"value": "zh-HK-WanLungNeural",
-					"label": "尹樑(男)"
-				}
-			]
-		},
-		{
-			"lang": "zh-CN",
-			"label": "中文（普通话，简体）",
-			"voices": [
-				{
-					"value": "zh-CN-XiaoxiaoNeural",
-					"label": "小潇 (女, Neural)"
-				},
-				{
-					"value": "zh-CN-YunyangNeural",
-					"label": "云扬 (男, Neural)"
-				},
-				{
-					"value": "zh-CN-YunxiNeural",
-					"label": "云熙 (女, Neural)"
-				},
-				{
-					"value": "zh-CN-XiaohanNeural",
-					"label": "晓涵 (女, Neural)"
-				},
-				{
-					"value": "zh-CN-YunyeNeural",
-					"label": "云叶 (男, Neural)"
-				},
-				{
-					"value": "zh-CN-XiaochenNeural",
-					"label": "晓晨 (女, Neural)"
-				},
-				{
-					"value": "zh-CN-XiaoshuangNeural",
-					"label": "晓霜 (女, Neural)"
-				},
-				{
-					"value": "zh-CN-XiaoruiNeural",
-					"label": "晓蕊 (女, Neural)"
-				},
-				{
-					"value": "zh-CN-YunfengNeural",
-					"label": "云风 (男, Neural)"
-				},
-				{
-					"value": "zh-CN-YunhaoNeural",
-					"label": "云浩 (男, Neural)"
-				},
-				{
-					"value": "zh-CN-YunjianNeural",
-					"label": "云建 (男, Neural)"
-				},
-				{
-					"value": "zh-CN-YunxiaNeural",
-					"label": "云侠 (男, Neural)"
-				},
-				{
-					"value": "zh-CN-YunxiNeural",
-					"label": "云希 (男, Neural)"
-				},
-				{
-					"value": "zh-CN-YunzeNeural",
-					"label": "云泽 (男, Neural)"
+					"label": "尹樑 (男)"
 				}
 			]
 		},
 		{
 			"lang": "zh-TW",
-			"label": "中文（台灣普通話，繁體）",
+			"label": "中文 (台灣普通話，繁體)",
 			"voices": [
 				{
 					"value": "zh-TW-HsiaoChenNeural",
-					"label": "小真(女)"
+					"label": "小真 (女)"
 				},
 				{
 					"value": "zh-TW-HsiaoYuNeural",
-					"label": "小雨(女)"
+					"label": "小雨 (女)"
 				},
 				{
 					"value": "zh-TW-YunJheNeural",
-					"label": "雲哲(男)"
+					"label": "雲哲 (男)"
+				}
+			]
+		},
+		{
+			"lang": "zh-CN",
+			"label": "中文 (普通话，简体)",
+			"voices": [
+				{
+					"value": "zh-CN-XiaoxiaoNeural",
+					"label": "小潇 (女)"
+				},
+				{
+					"value": "zh-CN-YunyangNeural",
+					"label": "云扬 (男)"
+				},
+				{
+					"value": "zh-CN-YunxiNeural",
+					"label": "云熙 (女)"
+				},
+				{
+					"value": "zh-CN-XiaohanNeural",
+					"label": "晓涵 (女)"
+				},
+				{
+					"value": "zh-CN-YunyeNeural",
+					"label": "云叶 (男)"
+				},
+				{
+					"value": "zh-CN-XiaochenNeural",
+					"label": "晓晨 (女)"
+				},
+				{
+					"value": "zh-CN-XiaoshuangNeural",
+					"label": "晓霜 (女)"
+				},
+				{
+					"value": "zh-CN-XiaoruiNeural",
+					"label": "晓蕊 (女)"
+				},
+				{
+					"value": "zh-CN-YunfengNeural",
+					"label": "云风 (男)"
+				},
+				{
+					"value": "zh-CN-YunhaoNeural",
+					"label": "云浩 (男)"
+				},
+				{
+					"value": "zh-CN-YunjianNeural",
+					"label": "云建 (男)"
+				},
+				{
+					"value": "zh-CN-YunxiaNeural",
+					"label": "云侠 (男)"
+				},
+				{
+					"value": "zh-CN-YunxiNeural",
+					"label": "云希 (男)"
+				},
+				{
+					"value": "zh-CN-YunzeNeural",
+					"label": "云泽 (男)"
+				}
+			]
+		},
+		{
+			"lang": "en-HK",
+			"label": "English (Hong Kong)",
+			"voices": [
+				{
+					"value": "en-HK-SamNeural",
+					"label": "Sam (Male)"
+				},
+				{
+					"value": "en-HK-YanNeural",
+					"label": "Yan (Female)"
 				}
 			]
 		}
 	],
 	"default": [
-		"en-US",
 		"en-GB",
+		"en-US",
 		"zh-HK",
+		"zh-TW",
 		"zh-CN",
-		"zh-TW"
+		"en-HK"
 	]
 }
