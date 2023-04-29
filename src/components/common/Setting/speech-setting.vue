@@ -63,7 +63,7 @@ export default {
     <NFormItem :label="$t('setting.rate')" path="rate">
       <NSlider v-model:value="formData.rate" :min="0" :max="10" />
     </NFormItem>
-    <NFormItem label="使用默認語音" path="useDefault">
+    <NFormItem label="使用設備默認語音" path="useDefault">
       <NSwitch v-model:value="formData.useDefault" />
     </NFormItem>
   </NForm>
