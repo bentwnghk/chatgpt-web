@@ -43,7 +43,7 @@ const routes: RouteRecordRaw[] = [
 	{
 		path: '/login',
 		name: 'login',
-		component: () => import('@/views/Login.vue'),
+		component: () => import('@/views/chat/login.vue'),
 		meta: {
 			needAuth: false,
 		}

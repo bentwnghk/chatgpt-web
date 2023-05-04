@@ -11,8 +11,8 @@ export function setupPageGuard(router: Router) {
           authStore.removeToken()
           next({ name: 'login' })
       }
-      catch (error) {
-      	if (error.status === 'Unauthorized') {
+      catch (error:any) {
+      	if (error?.status === 'Unauthorized') {
 					next({ name: 'login' })
       		return;
 				}

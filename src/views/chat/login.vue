@@ -10,7 +10,7 @@
 	</div>
 </template>
 
-<script>
+<script lang='ts'>
 import { getGoogleAuthURL, handleGoogleAuth, loadGoogleAuthConfig } from '@/api'
 import { useAuthStore } from '@/store'
 import { defineComponent, ref, watch, computed } from 'vue';
@@ -29,7 +29,7 @@ export default defineComponent({
 
 	setup() {
 		const ready = ref(false);
-		const GoogleConfig = ref({});
+		const GoogleConfig = ref<any>({});
 		const loginURL = getGoogleAuthURL();
 		const authStore = useAuthStore();
 		const router = useRouter();
@@ -47,10 +47,11 @@ export default defineComponent({
 		}
 		function loadScript() {
 			addScript()
-			return new Promise(resolve => {
-				let workerID = 0;
+			return new Promise<void>(resolve => {
+				let workerID:number|any = 0;
+				//@ts-ignore
 				const worker = () => {
-					if (window.google) {
+					if (window.hasOwnProperty('google')) {
 						clearInterval(workerID);
 						resolve();
 					}
@@ -60,25 +61,30 @@ export default defineComponent({
 			});
 		}
 
-		Promise.all([loadScript(), loadGoogleAuthConfig()]).then(([_, config]) => {
+		Promise.all([loadScript(), loadGoogleAuthConfig<any>()]).then(([_, config]) => {
 			GoogleConfig.value = config?.data;
 			// console.log(GoogleConfig);
 			ready.value = true;
 		});
 
+		/**
+		 * @ts-ignore
+		 */
 		function handleGoogleLogin() {
 			ready.value = false;
-			return new Promise((resolve) => {
+			return new Promise<any>((resolve) => {
+				// @ts-ignore
 				google.accounts.id.initialize({
 					...GoogleConfig.value,
-					callback(json) {
+					callback(json:any) {
 						resolve(json)
 					}
 				});
+				// @ts-ignore
 				google.accounts.id.prompt();
 			})
 			.then((json) => {
-				return handleGoogleAuth(json.credential || "");
+				return handleGoogleAuth<any>(json?.credential || "");
 			})
 			.then((json) => {
 				// console.log(json);
