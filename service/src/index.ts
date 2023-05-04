@@ -5,9 +5,20 @@ import { chatConfig, chatReplyProcess, currentModel } from './chatgpt'
 import { auth } from './middleware/auth'
 import { limiter } from './middleware/limiter'
 import { isNotEmptyString } from './utils/is'
+import { OAuth2Client } from 'google-auth-library';
+import NodeCache from "node-cache";
+import crypto from "crypto";
+
+const generateRandomHash = () => {
+	return crypto.randomBytes(16).toString('hex');
+};
+
+const CacheHelper = new NodeCache();
 
 const app = express()
 const router = express.Router()
+
+const oauth2Client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET, 'http://localhost:3002/auth/google/callback');
 
 app.use(express.static('public'))
 app.use(express.json())
@@ -55,15 +66,8 @@ router.post('/config', auth, async (req, res) => {
   }
 })
 
-router.post('/session', async (req, res) => {
-  try {
-    const AUTH_SECRET_KEY = process.env.AUTH_SECRET_KEY
-    const hasAuth = isNotEmptyString(AUTH_SECRET_KEY)
-    res.send({ status: 'Success', message: '', data: { auth: hasAuth, model: currentModel() } })
-  }
-  catch (error) {
-    res.send({ status: 'Fail', message: error.message, data: null })
-  }
+router.post('/session', auth, async (req, res) => {
+	res.send({ status: 'Success', message: '', data: { auth: true} })
 })
 
 router.post('/verify', async (req, res) => {
@@ -81,6 +85,42 @@ router.post('/verify', async (req, res) => {
     res.send({ status: 'Fail', message: error.message, data: null })
   }
 })
+
+router.get('/auth/google', (req, res) => {
+	const url = oauth2Client.generateAuthUrl({
+		access_type: 'offline',
+		scope: [
+			'https://www.googleapis.com/auth/userinfo.profile',
+			'https://www.googleapis.com/auth/userinfo.email',
+		],
+		redirect_uri:  req.protocol + '://' + req.get('host') + '/auth/google/callback',
+	});
+	res.redirect(url);
+});
+
+router.get('/auth/google/callback',async (req, res) => {
+	try {
+		const { tokens } = await oauth2Client.getToken(req.query.code);
+		oauth2Client.setCredentials(tokens);
+
+		const {token} = await oauth2Client.getAccessToken();
+		const {email} = await oauth2Client.getTokenInfo(token)
+		const [_, domain] = email.split("@");
+		const allowDomainList = process.env.GOOGLE_AUTH_ALLOW_DOMAIN.split(',');
+		if (allowDomainList.includes(domain)) {
+			const session = generateRandomHash();
+			CacheHelper.set(session, email, 86400 * 5 /** 5 day **/);
+
+			res.send({ status: 'Success', message: 'Login successfully', data: {session} })
+			return;
+		}
+	} catch (error) {
+		throw error;
+		res.send({ status: 'Fail', message: error.message, data: null })
+	}
+
+	res.send({ status: 'Fail', message: 'Login Fail', data: null })
+});
 
 app.use('', router)
 app.use('/api', router)
