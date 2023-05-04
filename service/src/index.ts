@@ -6,14 +6,12 @@ import { auth } from './middleware/auth'
 import { limiter } from './middleware/limiter'
 import { isNotEmptyString } from './utils/is'
 import { OAuth2Client } from 'google-auth-library';
-import NodeCache from "node-cache";
+import CacheHelper from "./utils/cache";
 import crypto from "crypto";
 
 const generateRandomHash = () => {
 	return crypto.randomBytes(16).toString('hex');
 };
-
-const CacheHelper = new NodeCache();
 
 const app = express()
 const router = express.Router()
@@ -98,13 +96,22 @@ router.get('/auth/google', (req, res) => {
 	res.redirect(url);
 });
 
+router.get('/auth/google/config', (req, res) => {
+	res.send({ status: 'Success', message: 'Google Login Config', data: {
+			client_id: oauth2Client._clientId,
+			ux_mode: 'popup',
+			login_uri: req.protocol + '://' + req.get('host'),
+	} })
+})
+
 router.get('/auth/google/callback',async (req, res) => {
 	try {
-		const { tokens } = await oauth2Client.getToken(req.query.code);
-		oauth2Client.setCredentials(tokens);
+		const tokenPayload = await oauth2Client.verifyIdToken({
+			idToken: req.query.code as string,
+		});
 
-		const {token} = await oauth2Client.getAccessToken();
-		const {email} = await oauth2Client.getTokenInfo(token)
+		const payload = tokenPayload.getPayload();
+		const email = payload?.email
 		const [_, domain] = email.split("@");
 		const allowDomainList = process.env.GOOGLE_AUTH_ALLOW_DOMAIN.split(',');
 		if (allowDomainList.includes(domain)) {

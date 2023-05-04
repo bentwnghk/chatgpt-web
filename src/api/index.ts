@@ -1,5 +1,5 @@
 import type { AxiosProgressEvent, GenericAbortSignal } from 'axios'
-import { post } from '@/utils/request'
+import { post, get } from '@/utils/request'
 import { useAuthStore, useSettingStore } from '@/store'
 
 export function fetchChatAPI<T = any>(
@@ -63,4 +63,21 @@ export function fetchVerify<T>(token: string) {
     url: '/verify',
     data: { token },
   })
+}
+
+export function getGoogleAuthURL() {
+	return `/api/auth/google`;
+}
+
+export function loadGoogleAuthConfig<T>() {
+	return get<T>({
+		url: '/auth/google/config',
+	});
+}
+
+export function handleGoogleAuth<T>(code: string) {
+	return get<T>({
+		url: '/auth/google/callback',
+		data: { code },
+	});
 }
