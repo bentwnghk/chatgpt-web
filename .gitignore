@@ -31,3 +31,5 @@ coverage
 # Environment variables files
 /service/.env
 /service/yarn.lock
+/.env
+/.env
