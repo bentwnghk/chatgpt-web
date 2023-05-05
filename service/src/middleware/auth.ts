@@ -6,7 +6,7 @@ const auth = async (req, res, next) => {
 		const hash = Authorization.replace('Bearer ', '').trim();
 
 		if (!Authorization || !hash || !CacheHelper.has(hash))
-			throw new Error('Error: 无访问权限 | No access rights')
+			throw new Error('Error: 無訪問權限 | No access rights')
 		next()
 	}
 	catch (error) {
