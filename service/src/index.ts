@@ -97,7 +97,7 @@ router.get('/auth/google', (req, res) => {
 		redirect_uri:  req.protocol + '://' + req.get('host') + '/auth/google/callback',
 	});
 	res.redirect(url);
-});
+})
 
 router.get('/auth/google/config', (req, res) => {
 	res.send({ status: 'Success', message: 'Google Login Config', data: {
@@ -130,7 +130,7 @@ router.get('/auth/google/callback',async (req, res) => {
 	}
 
 	res.send({ status: 'Fail', message: 'Login Fail', data: null })
-});
+})
 
 app.use('', router)
 app.use('/api', router)

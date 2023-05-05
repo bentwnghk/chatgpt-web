@@ -69,6 +69,7 @@ export function fetchAzureToken<T>() {
   return post<T>({
     url: '/get-azure-token',
   })
+}
 
 export function getGoogleAuthURL() {
 	return `/api/auth/google`;
