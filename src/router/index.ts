@@ -17,24 +17,45 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/chat/index.vue'),
       },
     ],
+		meta: {
+    	needAuth: true,
+		}
   },
 
   {
     path: '/404',
     name: '404',
     component: () => import('@/views/exception/404/index.vue'),
+		meta: {
+			needAuth: false,
+		}
   },
 
   {
     path: '/500',
     name: '500',
     component: () => import('@/views/exception/500/index.vue'),
+		meta: {
+			needAuth: false,
+		}
   },
+
+	{
+		path: '/login',
+		name: 'login',
+		component: () => import('@/views/chat/login.vue'),
+		meta: {
+			needAuth: false,
+		}
+	},
 
   {
     path: '/:pathMatch(.*)*',
     name: 'notFound',
     redirect: '/404',
+		meta: {
+			needAuth: false,
+		}
   },
 ]
 
