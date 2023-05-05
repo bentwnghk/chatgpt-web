@@ -2,7 +2,7 @@ name: build_docker
 
 on:
   push:
-    branches: [feat-add-speech]
+    branches: [wGoogleOAuth]
   release:
     types: [created] # 表示在创建新的 Release 时触发
 
@@ -36,5 +36,5 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/chatgpt-web-speech:${{ env.RELEASE_DATE }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/chatgpt-web-speech:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/chatgpt-web-speech-oauth:${{ env.RELEASE_DATE }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/chatgpt-web-speech-oauth:latest
