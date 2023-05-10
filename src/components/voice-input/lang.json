@@ -5,16 +5,16 @@
 			"label": "English (United Kingdom)",
 			"voices": [
 				{
-					"value": "en-GB-AbbiNeural",
-					"label": "Abbi (Female)"
+					"value": "en-GB-LibbyNeural",
+					"label": "Libby (Female)"
 				},
 				{
 					"value": "en-GB-RyanNeural",
 					"label": "Ryan (Male)"
 				},
 				{
-					"value": "en-GB-LibbyNeural",
-					"label": "Libby (Female)"
+					"value": "en-GB-AbbiNeural",
+					"label": "Abbi (Female)"
 				},
 				{
 					"value": "en-GB-OliverNeural",
@@ -59,16 +59,16 @@
 			"label": "English (United States)",
 			"voices": [
 				{
-					"value": "en-US-JennyNeural",
-					"label": "Jenny (Female)"
+					"value": "en-US-AriaNeural",
+					"label": "Aria (Female)"
 				},
 				{
 					"value": "en-US-GuyNeural",
 					"label": "Guy (Male)"
 				},
 				{
-					"value": "en-US-AriaNeural",
-					"label": "Aria (Female)"
+					"value": "en-US-JennyNeural",
+					"label": "Jenny (Female)"
 				},
 				{
 					"value": "en-US-TonyNeural",
