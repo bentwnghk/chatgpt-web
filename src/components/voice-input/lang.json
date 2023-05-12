@@ -21,8 +21,8 @@
 					"label": "Oliver (Male)"
 				},
 				{
-					"value": "en-GB-SoniaNeural",
-					"label": "Sonia (Female)"
+					"value": "en-GB-MiaNeural",
+					"label": "Mia (Female)"
 				},
 				{
 					"value": "en-GB-EthanNeural",
@@ -45,8 +45,8 @@
 					"label": "Noah (Male)"
 				},
 				{
-					"value": "en-GB-HollieNeural",
-					"label": "Hollie (Female)"
+					"value": "en-GB-SoniaNeural",
+					"label": "Sonia (Female)"
 				},
 				{
 					"value": "en-GB-ElliotNeural",
