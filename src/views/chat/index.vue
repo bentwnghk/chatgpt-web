@@ -468,8 +468,7 @@ onUnmounted(() => {
       :using-context="usingContext"
       :loading="loading"
       @export="handleExport"
-      @toggle-using-context="toggleUsingContext"
-      @clean="handleReset"
+      @handle-clear="handleClear"
     />
     <main class="flex-1 overflow-hidden">
       <div id="scrollRef" ref="scrollRef" class="h-full overflow-hidden overflow-y-auto">
@@ -515,6 +514,21 @@ onUnmounted(() => {
         <div class="flex items-center justify-between space-x-2">
           <AutoSpeak v-if="speechStore.enable" />
           <VoiceInput v-if="speechStore.enable" :is-loading="loading" @on-change="handleVoiceChange" @reset="handleReset" @submit="handleVoiceSubmit" />
+          <HoverButton v-if="!isMobile" @click="handleClear">
+            <span class="text-xl text-[#4f555e] dark:text-white">
+              <SvgIcon icon="ri:delete-bin-line" />
+            </span>
+          </HoverButton>
+          <HoverButton v-if="!isMobile" @click="handleExport">
+            <span class="text-xl text-[#4f555e] dark:text-white">
+              <SvgIcon icon="ri:download-2-line" />
+            </span>
+          </HoverButton>
+          <HoverButton @click="toggleUsingContext">
+            <span class="text-xl" :class="{ 'text-[#4b9e5f]': usingContext, 'text-[#a8071a]': !usingContext }">
+              <SvgIcon icon="ri:chat-history-line" />
+            </span>
+          </HoverButton>
           <NAutoComplete v-model:value="prompt" :options="searchOptions" :render-label="renderOption">
             <template #default="{ handleInput, handleBlur, handleFocus }">
               <NInput
