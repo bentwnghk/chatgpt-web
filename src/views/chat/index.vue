@@ -10,7 +10,7 @@ import { useScroll } from './hooks/useScroll'
 import { useChat } from './hooks/useChat'
 import { useUsingContext } from './hooks/useUsingContext'
 import HeaderComponent from './components/Header/index.vue'
-import { SvgIcon } from '@/components/common'
+import { HoverButton, SvgIcon } from '@/components/common'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { useChatStore, usePromptStore } from '@/store'
 import { fetchChatAPIProcess } from '@/api'
@@ -375,6 +375,21 @@ function handleDelete(index: number) {
   })
 }
 
+function handleClear() {
+  if (loading.value)
+    return
+
+  dialog.warning({
+    title: t('chat.clearChat'),
+    content: t('chat.clearChatConfirm'),
+    positiveText: t('common.yes'),
+    negativeText: t('common.no'),
+    onPositiveClick: () => {
+      chatStore.clearChatByUuid(+uuid)
+    },
+  })
+}
+
 function handleEnter(event: KeyboardEvent) {
   if (!isMobile.value) {
     if (event.key === 'Enter' && !event.shiftKey) {
@@ -465,8 +480,8 @@ onUnmounted(() => {
 <template>
   <div class="flex flex-col w-full h-full">
     <HeaderComponent
+      v-if="isMobile"
       :using-context="usingContext"
-      :loading="loading"
       @export="handleExport"
       @handle-clear="handleClear"
     />
