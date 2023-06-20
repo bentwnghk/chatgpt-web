@@ -3,12 +3,12 @@ import {computed, nextTick, ref} from 'vue'
 import { HoverButton, SvgIcon } from '@/components/common'
 import { useAppStore, useChatStore } from '@/store'
 import Setting from '@/components/common/Setting/index.vue'
-import {t} from "@/locales";
-import {useDialog} from "naive-ui";
+// import {t} from "@/locales";
+// import {useDialog} from "naive-ui";
 
 interface Props {
   usingContext: boolean;
-	loading: boolean;
+//	loading: boolean;
 }
 
 interface Emit {
@@ -16,7 +16,7 @@ interface Emit {
   (ev: 'handleClear'): void
 }
 
-const {loading} = defineProps<Props>()
+// const {loading} = defineProps<Props>()
 
 const emit = defineEmits<Emit>()
 const showSetting = ref(false)
@@ -26,7 +26,7 @@ const chatStore = useChatStore()
 
 const collapsed = computed(() => appStore.siderCollapsed)
 const currentChatHistory = computed(() => chatStore.getChatHistoryByCurrentActive)
-const dialog = useDialog()
+// const dialog = useDialog()
 
 function handleUpdateCollapsed() {
   appStore.setSiderCollapsed(!collapsed.value)
@@ -43,16 +43,7 @@ function handleExport() {
 }
 
 function handleClear() {
-	if (loading)
-		return
-
-	dialog.warning({
-		title: t('chat.clearChat'),
-		content: t('chat.clearChatConfirm'),
-		positiveText: t('common.yes'),
-		negativeText: t('common.no'),
-		onPositiveClick: () => emit('clean'),
-	})
+  emit('handleClear')
 }
 </script>
 
