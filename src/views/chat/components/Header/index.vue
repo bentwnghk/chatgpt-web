@@ -6,10 +6,10 @@ import Setting from '@/components/common/Setting/index.vue'
 // import {t} from "@/locales";
 // import {useDialog} from "naive-ui";
 
-interface Props {
-  usingContext: boolean;
-//	loading: boolean;
-}
+// interface Props {
+//   usingContext: boolean;
+//	 loading: boolean;
+// }
 
 interface Emit {
   (ev: 'export'): void
