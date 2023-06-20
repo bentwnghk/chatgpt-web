@@ -43,10 +43,6 @@ function handleExport() {
 }
 
 function handleClear() {
-  emit('handleClear')
-}
-
-function handleClear() {
 	if (loading)
 		return
 
