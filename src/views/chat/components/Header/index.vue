@@ -78,6 +78,11 @@ function handleClear() {
             <SvgIcon icon="ri:delete-bin-line" />
           </span>
         </HoverButton>
+        <HoverButton @click="showSetting = true">
+					<span class="text-xl text-[#4f555e] dark:text-white">
+						<SvgIcon icon="ri:settings-4-line" />
+					</span>
+				</HoverButton>
       </div>
     </div>
 		<Setting v-if="showSetting" v-model:visible="showSetting" />
