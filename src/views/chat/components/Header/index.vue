@@ -3,20 +3,21 @@ import {computed, nextTick, ref} from 'vue'
 import { HoverButton, SvgIcon } from '@/components/common'
 import { useAppStore, useChatStore } from '@/store'
 import Setting from '@/components/common/Setting/index.vue'
-// import {t} from "@/locales";
-// import {useDialog} from "naive-ui";
+import {t} from "@/locales";
+import {useDialog} from "naive-ui";
 
-// interface Props {
-//   usingContext: boolean;
-//	 loading: boolean;
-// }
+interface Props {
+  usingContext: boolean;
+	loading: boolean;
+}
 
 interface Emit {
   (ev: 'export'): void
-  (ev: 'handleClear'): void
+  (ev: 'toggleUsingContext'): void
+  (ev: 'clean'): void
 }
 
-// const {loading} = defineProps<Props>()
+const {loading} = defineProps<Props>()
 
 const emit = defineEmits<Emit>()
 const showSetting = ref(false)
@@ -26,7 +27,7 @@ const chatStore = useChatStore()
 
 const collapsed = computed(() => appStore.siderCollapsed)
 const currentChatHistory = computed(() => chatStore.getChatHistoryByCurrentActive)
-// const dialog = useDialog()
+const dialog = useDialog()
 
 function handleUpdateCollapsed() {
   appStore.setSiderCollapsed(!collapsed.value)
@@ -42,8 +43,21 @@ function handleExport() {
   emit('export')
 }
 
+function toggleUsingContext() {
+  emit('toggleUsingContext')
+}
+
 function handleClear() {
-  emit('handleClear')
+	if (loading)
+		return
+
+	dialog.warning({
+		title: t('chat.clearChat'),
+		content: t('chat.clearChatConfirm'),
+		positiveText: t('common.yes'),
+		negativeText: t('common.no'),
+		onPositiveClick: () => emit('clean'),
+	})
 }
 </script>
 
@@ -68,17 +82,22 @@ function handleClear() {
         {{ currentChatHistory?.title ?? '' }}
       </h1>
       <div class="flex items-center space-x-2">
+        <HoverButton @click="toggleUsingContext">
+          <span class="text-xl" :class="{ 'text-[#4b9e5f]': usingContext, 'text-[#a8071a]': !usingContext }">
+            <SvgIcon icon="ri:chat-history-line" />
+          </span>
+        </HoverButton>
         <HoverButton @click="handleExport">
           <span class="text-xl text-[#4f555e] dark:text-white">
             <SvgIcon icon="ri:download-2-line" />
           </span>
         </HoverButton>
-        <HoverButton @click="handleClear">
-          <span class="text-xl text-[#4f555e] dark:text-white">
-            <SvgIcon icon="ri:delete-bin-line" />
-          </span>
-        </HoverButton>
-        <HoverButton @click="showSetting = true">
+				<HoverButton @click="handleClear">
+            <span class="text-xl text-[#4f555e] dark:text-white">
+              <SvgIcon icon="ri:delete-bin-line" />
+            </span>
+				</HoverButton>
+				<HoverButton @click="showSetting = true">
 					<span class="text-xl text-[#4f555e] dark:text-white">
 						<SvgIcon icon="ri:settings-4-line" />
 					</span>
