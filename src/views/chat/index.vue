@@ -10,7 +10,7 @@ import { useScroll } from './hooks/useScroll'
 import { useChat } from './hooks/useChat'
 import { useUsingContext } from './hooks/useUsingContext'
 import HeaderComponent from './components/Header/index.vue'
-import { HoverButton, SvgIcon } from '@/components/common'
+import { SvgIcon } from '@/components/common'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
 import { useChatStore, usePromptStore } from '@/store'
 import { fetchChatAPIProcess } from '@/api'
@@ -375,21 +375,6 @@ function handleDelete(index: number) {
   })
 }
 
-function handleClear() {
-  if (loading.value)
-    return
-
-  dialog.warning({
-    title: t('chat.clearChat'),
-    content: t('chat.clearChatConfirm'),
-    positiveText: t('common.yes'),
-    negativeText: t('common.no'),
-    onPositiveClick: () => {
-      chatStore.clearChatByUuid(+uuid)
-    },
-  })
-}
-
 function handleEnter(event: KeyboardEvent) {
   if (!isMobile.value) {
     if (event.key === 'Enter' && !event.shiftKey) {
@@ -480,10 +465,11 @@ onUnmounted(() => {
 <template>
   <div class="flex flex-col w-full h-full">
     <HeaderComponent
-      v-if="isMobile"
       :using-context="usingContext"
+      :loading="loading"
       @export="handleExport"
       @toggle-using-context="toggleUsingContext"
+      @clean="handleReset"
     />
     <main class="flex-1 overflow-hidden">
       <div id="scrollRef" ref="scrollRef" class="h-full overflow-hidden overflow-y-auto">
@@ -529,21 +515,6 @@ onUnmounted(() => {
         <div class="flex items-center justify-between space-x-2">
           <AutoSpeak v-if="speechStore.enable" />
           <VoiceInput v-if="speechStore.enable" :is-loading="loading" @on-change="handleVoiceChange" @reset="handleReset" @submit="handleVoiceSubmit" />
-          <HoverButton @click="handleClear">
-            <span class="text-xl text-[#4f555e] dark:text-white">
-              <SvgIcon icon="ri:delete-bin-line" />
-            </span>
-          </HoverButton>
-          <HoverButton v-if="!isMobile" @click="handleExport">
-            <span class="text-xl text-[#4f555e] dark:text-white">
-              <SvgIcon icon="ri:download-2-line" />
-            </span>
-          </HoverButton>
-          <HoverButton v-if="!isMobile" @click="toggleUsingContext">
-            <span class="text-xl" :class="{ 'text-[#4b9e5f]': usingContext, 'text-[#a8071a]': !usingContext }">
-              <SvgIcon icon="ri:chat-history-line" />
-            </span>
-          </HoverButton>
           <NAutoComplete v-model:value="prompt" :options="searchOptions" :render-label="renderOption">
             <template #default="{ handleInput, handleBlur, handleFocus }">
               <NInput
