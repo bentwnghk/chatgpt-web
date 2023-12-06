@@ -30,11 +30,13 @@ export default {
   },
   chat: {
     newChatButton: '新建聊天',
+    newChatTitle: '新建聊天',
     placeholder: '来说点什么吧...（Shift + Enter = 换行，"/" 触发提示词）',
     placeholderMobile: '来说点什么...',
     copy: '复制',
     copied: '复制成功',
     copyCode: '复制代码',
+    copyFailed: '复制失败',
     clearChat: '清空会话',
     clearChatConfirm: '是否清空会话?',
     exportImage: '保存会话到图片',
@@ -50,6 +52,7 @@ export default {
     clearHistoryConfirm: '确定清空记录?',
     preview: '预览',
     showRawText: '显示原文',
+    thinking: '思考中...',
   },
   setting: {
     setting: '设置',
@@ -78,6 +81,9 @@ export default {
     speakSound: '声音',
     pitch: '音调',
     rate: '语速',
+    openSource: '此项目开源于',
+    freeMIT: '免费且基于 MIT 协议，没有任何形式的付费行为',
+    stars: '如果你觉得此项目对你有帮助，请在 GitHub 上给我一个星星！',
   },
   store: {
     siderButton: '提示词商店',

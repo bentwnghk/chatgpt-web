@@ -70,9 +70,9 @@ function addCopyEvents() {
         const code = btn.parentElement?.nextElementSibling?.textContent
         if (code) {
           copyToClip(code).then(() => {
-            btn.textContent = '複製成功'
+            btn.textContent = t('chat.copied')
             setTimeout(() => {
-              btn.textContent = '複製代碼'
+              btn.textContent = t('chat.copyCode')
             }, 1000)
           })
         }
