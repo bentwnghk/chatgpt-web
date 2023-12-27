@@ -7,7 +7,7 @@ import { limiter } from './middleware/limiter'
 import { OAuth2Client } from 'google-auth-library';
 import CacheHelper from "./utils/cache";
 import crypto from "crypto";
-const { AuthorizationCode } = require('simple-oauth2');
+import { AuthorizationCode } from 'simple-oauth2';
 import fetch from 'node-fetch'
 
 const getZohoEmail = async (token) => {

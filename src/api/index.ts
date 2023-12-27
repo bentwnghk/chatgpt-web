@@ -70,12 +70,12 @@ export function getGoogleAuthURL() {
 }
 
 export function getZohoAuthURL() {
-	const redis = `${location.protocol}//${location.host}/#/zoho/callback`;
+	const redis = `${location.protocol}//${location.host}/`;
 	return `/api/auth/zoho?redirect_uri=${encodeURIComponent(redis)}`;
 }
 
 export function getZohoAuthByCode(code: string) {
-	const redis = `${location.protocol}//${location.host}/#/zoho/callback`;
+	const redis = `${location.protocol}//${location.host}/`;
 
 	return get<T>({
 		url: '/auth/zoho/callback',

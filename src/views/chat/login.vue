@@ -42,7 +42,11 @@ export default defineComponent({
 		const router = useRouter();
 		const route = useRoute();
 		const logined = ref(false);
-		const inZohoCallback = ref((route.name == 'zoho-callback'));
+		const inZohoCallback = computed(() => {
+			const query = new URLSearchParams(location.search);
+			const uc = query.get('accounts-server') || "";
+			return query.has('code') && /accounts\.zoho\.com/i.test(uc);
+		});
 
 		function addScript() {
 			if (!document.querySelector("#google_api_lib")) {
@@ -104,9 +108,9 @@ export default defineComponent({
 			return handleGoogleAuth<any>(json?.credential || "")
 				.then((json) => {
 					// console.log(json);
-					const token = json?.data?.token || "";
+					const token = json?.data?.session || "";
 					if (token) {
-						authStore.setToken(json?.data?.session || "");
+						authStore.setToken(token);
 						logined.value = true;
 					}
 				})
@@ -124,7 +128,8 @@ export default defineComponent({
 
 		// console.log(inZohoCallback, route.name);
 		if (inZohoCallback) {
-			getZohoAuthByCode(route.query.code as string)
+			const q = new URLSearchParams(location.search);
+			getZohoAuthByCode(q.get("code"))
 			.then((json) => {
 				console.log(json);
 				const token = json?.data?.session || "";
