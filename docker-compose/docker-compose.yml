@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  chatgpt-web-ui:
+    image: "mmhk/chatgpt-web-ui"
+    ports:
+      - 3002:3002
+    environment:
+      GOOGLE_CLIENT_ID: 466455604851-9arfucsbj6na7g3060rk0dkmqtri6gat.apps.googleusercontent.com
+      GOOGLE_CLIENT_SECRET: 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
+      GOOGLE_AUTH_ALLOW_DOMAIN: mixmedia.com,driver.com.hk
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_API_BASE_URL: http://azure-openai:8080
+      OPENAI_API_MODEL: gpt-4
+      AUTH_SECRET_KEY: ""
+      MAX_REQUEST_PER_HOUR: 1000
+      TIMEOUT_MS: 60000
+    depends_on:
+      - azure-openai
+    links:
+      - azure-openai
+    networks:
+      - chatgpt-ns
+  azure-openai:
+    image: "mmhk/azure-openai-proxy"
+    ports:
+      - 8080:8080
+    environment:
+      AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
+      AZURE_OPENAI_MODEL_MAPPER: gpt-4=gpt-4
+      AZURE_OPENAI_API_VER: 2023-03-15-preview
+    networks:
+      - chatgpt-ns
+networks:
+  chatgpt-ns:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.55.0/24
